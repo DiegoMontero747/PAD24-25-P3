@@ -1,4 +1,17 @@
+import React, { useState } from "react";
+
 const BookList = ({ books, onCategorize }) => {
+  const [selectedCategories, setSelectedCategories] = useState({}); // Nuevo estado para categorías seleccionadas
+  const handleCategoryChange = (book, genre) => {
+    // Se actualiza el estado local de las categorías seleccionadas
+    setSelectedCategories((prev) => ({
+      ...prev,
+      [book.id]: genre, // Se guarda la categoría para el libro que se está categorizando
+    }));
+    // Se llama al manejador global para categorizar
+    onCategorize(book, genre);
+  };
+
   return (
     <div className="container">
       <h2 className="my-4">Resultados:</h2>
@@ -18,7 +31,8 @@ const BookList = ({ books, onCategorize }) => {
                 </p>
                 <select
                   className="form-select"
-                  onChange={(e) => onCategorize(book, e.target.value)}
+                  value={selectedCategories[book.id] || ""} // Se muestra "Categorizar" por defecto para libros no categorizados
+                  onChange={(e) => handleCategoryChange(book, e.target.value)}
                 >
                   <option value="">Categorizar</option>
                   <option value="Aventuras">Aventuras</option>
