@@ -15,6 +15,7 @@ const App = () => {
 
     const updatedSearches = [query, ...recentSearches.slice(0, 4)];
     setRecentSearches(updatedSearches);
+    addRecentSearch(updatedSearches)
     localStorage.setItem('recentSearches', JSON.stringify(updatedSearches));
   };
 
@@ -25,9 +26,37 @@ const App = () => {
   };
 
   useEffect(() => {
-    const savedSearches = JSON.parse(localStorage.getItem('recentSearches')) || [];
-    setRecentSearches(savedSearches);
+    const fetchRecentSearches = async () => {
+      const searches = await getRecentSearches();
+      setRecentSearches(searches);
+    };
+    fetchRecentSearches();
   }, []);
+
+  const addRecentSearch = async (search) => {
+    if (navigator.serviceWorker.controller) {
+      navigator.serviceWorker.controller.postMessage({
+        type: "ADD_RECENT_SEARCH",
+        payload: search,
+      });
+    }
+  };
+
+  const getRecentSearches = async () => {
+    return new Promise((resolve) => {
+      if (navigator.serviceWorker.controller) {
+        const messageChannel = new MessageChannel();
+        messageChannel.port1.onmessage = (event) => resolve(event.data);
+  
+        navigator.serviceWorker.controller.postMessage(
+          { type: "GET_RECENT_SEARCHES" },
+          [messageChannel.port2]
+        );
+      } else {
+        resolve([]);
+      }
+    });
+  };
 
   return (
     <div className="container my-4">
