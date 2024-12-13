@@ -60,10 +60,7 @@ const App = () => {
 
   return (
     <div className="container my-4">
-      <header className="text-center mb-4">
-        <h1 className="display-4">Buscador de Libros</h1>
-        <p className="text-muted">Encuentra tus libros favoritos y categorízalos fácilmente</p>
-      </header>
+      
 
       <div className="mb-4">
         <SearchBar onSearch={handleSearch} />

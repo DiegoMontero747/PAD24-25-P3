@@ -1,10 +1,12 @@
 
-const CACHE_NAME = "book-search-cache-v1";
+const CACHE_NAME = "practica3_SW";
 const urlsToCache = [
   "/", 
   "/index.html",
   "/static/css/main.css", 
   "/static/js/main.js",
+  "/bootstrap/js/bootstrap.min.js",
+  "/bootstrap/css/bootstrap.min.css",
 ];
 let recentSearches = []; // Array para almacenar las búsquedas recientes
 
