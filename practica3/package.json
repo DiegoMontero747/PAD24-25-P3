@@ -2,8 +2,8 @@
   "name": "practica3",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://DiegoMontero747.github.io/practica3",
   "dependencies": {
-    "homepage": "https://DiegoMontero747.github.io/practica3",
     "axios": "^1.7.9",
     "cra-template": "1.2.0",
     "gh-pages": "^6.2.0",
