@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "react": "^19.0.0"
-  },
-  "devDependencies": {
-    "workbox-cli": "^7.3.0"
-  }
-}
